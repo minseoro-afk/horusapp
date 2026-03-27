@@ -262,7 +262,7 @@
               </p>
   
               <form action="https://formspree.io/f/mbdplabe" method="POST" className="mt-8 grid gap-4 sm:grid-cols-2">
-                <input type="hidden" name="_next" value="https://your-actual-stackblitz-url/thanks" />
+              <input type="hidden" name="_next" value="https://horusapp-n9zo.vercel.app/thanks" />
                 <input type="hidden" name="_subject" value="New Horus Request" /> 
                 
                 <input 
