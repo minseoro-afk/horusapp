@@ -2,6 +2,7 @@
 import { useRef, useState } from 'react'
   export default function HorusLandingPage() {
     const [showPaymentModal, setShowPaymentModal] = useState(false);
+    const [selectedPlan, setSelectedPlan] = useState("starter");
     const formRef = useRef<HTMLFormElement | null>(null);
   
     return (
@@ -308,10 +309,66 @@ import { useRef, useState } from 'react'
                 placeholder="What should Horus prioritize for you right now" /> 
                 
                 <button 
-                type="submit" 
+                type="button"
+                onClick={() => setShowPaymentModal(true)}
                 className="rounded-2xl bg-amber-400 px-6 py-4 text-base font-semibold text-zinc-950 transition hover:-translate-y-0.5 hover:bg-amber-300 sm:col-span-2" > Join beta and request my schedule </button> 
                 
                 </form>
+                {showPaymentModal && (
+  <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+    <div className="bg-zinc-900 p-8 rounded-2xl text-center max-w-sm w-full">
+
+      <h2 className="text-xl font-semibold mb-4">Confirm Payment</h2>
+      <div className="space-y-3 mb-4">
+
+  <button
+    onClick={() => setSelectedPlan("starter")}
+    className="w-full p-3 rounded-lg border"
+  >
+    Starter – $5
+  </button>
+
+  <button
+    onClick={() => setSelectedPlan("plus")}
+    className="w-full p-3 rounded-lg border"
+  >
+    Plus – $8
+  </button>
+
+  <button
+    onClick={() => setSelectedPlan("exam")}
+    className="w-full p-3 rounded-lg border"
+  >
+    Exam Mode – $15
+  </button>
+
+</div>
+      
+      <a
+        href={`https://www.venmo.com/u/HorusPlannerAI?note=Horus-${selectedPlan}`}
+        target="_blank"
+        className="block mb-4 bg-amber-400 text-black py-2 rounded-lg"
+      >
+        Open Venmo
+      </a>
+
+      <button
+        onClick={() => formRef.current?.requestSubmit()}
+        className="w-full bg-white text-black py-2 rounded-lg"
+      >
+        Confirm Payment
+      </button>
+
+      <button
+        onClick={() => setShowPaymentModal(false)}
+        className="mt-3 text-sm text-zinc-400"
+      >
+        Cancel
+      </button>
+
+    </div>
+  </div>
+)}
                 
             </div>
   
