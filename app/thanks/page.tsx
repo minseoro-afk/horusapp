@@ -8,6 +8,7 @@ export default function Thanks() {
         </p>
         <p className="mt-2 text-zinc-400">
         Please send payment via Venmo to confirm your request.
+        </p>
         <a
           href="https://www.venmo.com/u/HorusPlannerAI"
           target="_blank"
