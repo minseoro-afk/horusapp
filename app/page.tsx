@@ -1,5 +1,9 @@
-
+'use client'
+import { useRef, useState } from 'react'
   export default function HorusLandingPage() {
+    const [showPaymentModal, setShowPaymentModal] = useState(false);
+    const formRef = useRef<HTMLFormElement | null>(null);
+  
     return (
       <div className="min-h-screen bg-zinc-950 text-white">
         <section className="relative overflow-hidden">
@@ -70,7 +74,7 @@
                     <p className="mt-1 text-sm text-zinc-400">Fast turnaround</p>
                   </div>
                   <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur">
-                    <p className="text-2xl font-semibold">$2+</p>
+                    <p className="text-2xl font-semibold">$5+</p>
                     <p className="mt-1 text-sm text-zinc-400">Easy student pricing</p>
                   </div>
                   <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur">
@@ -225,17 +229,17 @@
                 {[
                   {
                     tier: 'Starter',
-                    price: '$2',
+                    price: '$5',
                     desc: 'One optimized weekly plan delivered within 24 hours',
                   },
                   {
                     tier: 'Plus',
-                    price: '$3',
+                    price: '$8',
                     desc: 'Weekly plan with one revision and deadline balancing',
                   },
                   {
                     tier: 'Exam Mode',
-                    price: '$5',
+                    price: '$15',
                     desc: 'High priority planning for midterms, finals, and stacked deadlines',
                   },
                 ].map((plan) => (
@@ -261,10 +265,22 @@
                 Fill out the form and our team will generate a realistic weekly schedule based on your classes, deadlines, priorities, and available time.
               </p>
   
-              <form action="https://formspree.io/f/mbdplabe" method="POST" className="mt-8 grid gap-4 sm:grid-cols-2">
-              <input type="hidden" name="_next" value="https://horusapp-n9zo.vercel.app/thanks" />
-                <input type="hidden" name="_subject" value="New Horus Request" /> 
-                
+              <form 
+                ref={formRef}
+                action="https://formspree.io/f/mbdplabe"
+                method="POST"
+                className="mt-8 grid gap-4 sm:grid-cols-2"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setShowPaymentModal(true);
+                }}
+                >
+                <input
+                  type="hidden"
+                  name="_next"
+                  value="https://horusapp-n9zo.vercel.app/thanks"
+                />
+
                 <input 
                 name="Name" 
                 className="rounded-2xl border border-white/10 bg-zinc-900/70 px-4 py-3 text-white outline-none placeholder:text-zinc-500 focus:border-amber-300" 
@@ -296,6 +312,7 @@
                 className="rounded-2xl bg-amber-400 px-6 py-4 text-base font-semibold text-zinc-950 transition hover:-translate-y-0.5 hover:bg-amber-300 sm:col-span-2" > Join beta and request my schedule </button> 
                 
                 </form>
+                
             </div>
   
             <div className="space-y-6">
